@@ -1,0 +1,34 @@
+{
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "form-data": "^3.0.0",
+    "imagemin": "^7.0.1",
+    "imagemin-optipng": "^8.0.0",
+    "instagram-private-api": "^1.43.3",
+    "looks-same": "^7.2.4",
+    "sharp": "^0.26.2",
+    "twitter-lite": "^0.14.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.12.1",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.1"
+  },
+  "eslintConfig": {
+    "env": {
+      "es6": true,
+      "node": true
+    },
+    "extends": [
+      "airbnb-base"
+    ],
+    "ignorePatterns": [
+      "!.github/",
+      ".github/*",
+      "!.github/scripts"
+    ],
+    "rules": {
+      "no-console": "off"
+    }
+  }
+}
