@@ -1,0 +1,29 @@
+name: Get new image
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '9 9 * * *'
+jobs:
+  get_image:
+    runs-on: ubuntu-latest
+    name: Check for new image
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          token: ${{secrets.GH_PERSONAL_ACCESS_TOKEN}} # PAT makes workflow's push trigger other workflows
+      - name: Setup node
+        uses: actions/setup-node@v2-beta
+      - name: Install dependencies
+        run: npm i looks-same --no-package-lock --only=production
+      - name: Fetch new image
+        run: node ./.github/scripts/update-image
+      - name: Commit new image
+        run: |
+          echo "Committing image"
+          git config user.name "${{github.actor}}"
+          git config user.email "${{github.actor}}@users.noreply.github.com"
+          git add ./.github/assets/latest.png || exit 0
+          git commit -m "Update latest image" -a || exit 0
+          git push -f -q
